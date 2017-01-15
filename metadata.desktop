@@ -1,0 +1,20 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Bitcoin price plasmoid
+Comment=Shows the current price of Bitcoin in Bitstamp
+Type=Service
+ServiceTypes=Plasma/Applet
+Icon=applications-bitcoin
+
+#X-KDE-Library=ismacasti_btcplasmoid
+X-KDE-PluginInfo-Name=eu.casti.isma.btcplasmoid
+# X-KDE-ParentApp=
+X-KDE-PluginInfo-Author=Ismael Castiñeira
+X-KDE-PluginInfo-Email=isma.casti@gmail.com
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-Version=0.1
+X-KDE-ServiceTypes=Plasma/Applet
+X-Plasma-API=declarativeappletscript
+X-Plasma-MainScript=ui/main.qml
+# X-Plasma-RemoteLocation=
+X-KDE-PluginInfo-Category=Online Services
