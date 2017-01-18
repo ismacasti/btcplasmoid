@@ -4,7 +4,7 @@ Name=Bitcoin price plasmoid
 Comment=Shows the current price of Bitcoin in Bitstamp
 Type=Service
 ServiceTypes=Plasma/Applet
-Icon=applications-bitcoin
+Icon=bitcoin
 
 #X-KDE-Library=ismacasti_btcplasmoid
 X-KDE-PluginInfo-Name=eu.casti.isma.btcplasmoid
