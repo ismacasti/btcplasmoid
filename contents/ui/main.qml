@@ -38,7 +38,7 @@ Item{
         }
 
         
-        text: "Loading...";
+        text: "";
         minimumPixelSize: theme.mSize(theme.smallestFont).height
         fontSizeMode: Text.Fit
         wrapMode: Text.NoWrap
@@ -55,23 +55,29 @@ Item{
         }
     }
     
-//     PlasmaComponents.BusyIndicator {
-//         anchors.centerIn: parent
-//         //whilst the model is loading, stay visible
-//         //we use opacity rather than visible to force an animation
-//         id: busy
-//         Behavior on opacity {
-//             PropertyAnimation {
-//                 //this comes from PlasmaCore
-//                 duration: units.shortDuration
-//             }
-//         }
-//     }
+    PlasmaComponents.BusyIndicator {
+        anchors.left: btcIcon.right
+        //anchors.right: parent.right
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        //whilst the model is loading, stay visible
+        //we use opacity rather than visible to force an animation
+        id: busy
+        Behavior on opacity {
+            PropertyAnimation {
+                //this comes from PlasmaCore
+                duration: units.shortDuration
+            }
+        }
+    }
     Component.onCompleted: {
         getData();
     }
     
     function getData() {
+        priceLabel.opacity = 0;
+        busy.opacity = 1;
+        
         var xmlhttp = new XMLHttpRequest();
         var url = "https://www.bitstamp.net/api/v2/ticker/btcusd/";
         
@@ -85,10 +91,16 @@ Item{
         xmlhttp.send();
     }
     
+    Timer {
+        interval: 300000; running: true; repeat: true
+        onTriggered: getData();
+    }
+    
     function parseData(response){
         var data = JSON.parse(response);
         priceLabel.text = "$" + data["last"];
         busy.opacity = 0;
+        priceLabel.opacity = 1;
     }
 }
     
