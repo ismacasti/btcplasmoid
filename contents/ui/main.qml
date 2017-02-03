@@ -13,11 +13,14 @@ Item{
     width: units.gridUnit * 10
     height: units.gridUnit * 4
     
+    
+    //property int refreshTime: plasmoid.configuration.DataSource.refresh_time
+    
     //Plasmoid.preferredRepresentation: Plasmoid.compactRepresentation
     
     
     Image {
-        source: "Bitcoin.svg"
+        source: "../images/Bitcoin.svg"
         id: btcIcon
         //Layout.fillHeight: true
         fillMode: Image.PreserveAspectFit
@@ -74,7 +77,9 @@ Item{
         getData();
     }
     
-    function getData() {
+    function getData(updateDelay) {
+        
+        console.log("Updating every " + updateDelay);
         priceLabel.opacity = 0;
         busy.opacity = 1;
         
@@ -92,8 +97,10 @@ Item{
     }
     
     Timer {
-        interval: 300000; running: true; repeat: true
-        onTriggered: getData();
+        interval: (plasmoid.configuration.updateDelay) ? 1000 * 60 * plasmoid.configuration.updateDelay : 1000 * 60 * 5 ;
+        running: true;
+        repeat: true;
+        onTriggered: getData(interval);
     }
     
     function parseData(response){
